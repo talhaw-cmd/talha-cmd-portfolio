@@ -52,6 +52,9 @@ const EXPERIENCE = [
   },
 ];
 
+// Fill in the real URLs below for each project.
+// - liveLink: the deployed/live URL (leave as "" to hide the "Live Demo" button)
+// - githubLink: the specific repo URL (falls back to your GitHub profile if left as PROFILE.github)
 const PROJECTS = [
   {
     name: "Smart Disaster Relief System",
@@ -59,7 +62,8 @@ const PROJECTS = [
     stack: ["Flask", "MongoDB Atlas", "Python", "Railway"],
     description:
       "A relief-coordination platform with seven data modules — auth, requests, resources, volunteers — built on session-based login, bcrypt password hashing, and full CRUD. Migrated from local storage to MongoDB Atlas and deployed on Railway.",
-    link: PROFILE.github,
+    liveLink: "https://smart-relief-system-production.up.railway.app/", // e.g. "https://sdrs.up.railway.app"
+    githubLink: "https://github.com/talhaw-cmd/smart-relief-system", // e.g. "https://github.com/talhaw-cmd/smart-disaster-relief-system"
   },
   {
     name: "AI Resume Analyzer",
@@ -67,7 +71,8 @@ const PROJECTS = [
     stack: ["React", "FastAPI", "Python"],
     description:
       "A resume feedback tool pairing a React frontend with a FastAPI backend. Involved tracking down a tricky CORS failure caused by an Nginx reverse proxy silently dropping headers in production.",
-    link: PROFILE.github,
+    liveLink: "https://ai-resume-analyzer-two-hazel.vercel.app/", // e.g. "https://ai-resume-analyzer.vercel.app"
+    githubLink: "https://github.com/talhaw-cmd/AI-Resume-Analyzer", // e.g. "https://github.com/talhaw-cmd/ai-resume-analyzer"
   },
   {
     name: "Foodies — Food Ordering App",
@@ -75,7 +80,8 @@ const PROJECTS = [
     stack: ["React.js", "EmailJS", "localStorage"],
     description:
       "A food-ordering platform with category filters, a persistent cart backed by localStorage, and automated order-confirmation emails via EmailJS. Built mobile-first for a consistent experience on any screen.",
-    link: PROFILE.github,
+    liveLink: "https://foodies-app-self-eight.vercel.app/", // e.g. "https://foodies-app.vercel.app"
+    githubLink: "https://github.com/talhaw-cmd/foodies-app", // e.g. "https://github.com/talhaw-cmd/foodies"
   },
   {
     name: "Developer Portfolio",
@@ -83,7 +89,8 @@ const PROJECTS = [
     stack: ["React", "Vite", "CSS"],
     description:
       "A performance-first personal site showcasing full-stack and frontend work — the same site framework this page is built from. Has drawn over 1,000 views from potential employers and clients.",
-    link: PROFILE.portfolio,
+    liveLink: "https://coding-portfolio-ten.vercel.app/",
+    githubLink: "https://github.com/talhaw-cmd/Coding-Portfolio", // e.g. "https://github.com/talhaw-cmd/portfolio"
   },
 ];
 
@@ -423,15 +430,6 @@ export default function App() {
               <Reveal as="article" className="project-card" delay={i * 100} key={project.name}>
                 <div className="project-card-top">
                   <span className="project-tag">{project.tag}</span>
-                  <a
-                    href={project.link}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="project-link"
-                    aria-label={`Open ${project.name}`}
-                  >
-                    ↗
-                  </a>
                 </div>
                 <h3 className="project-name">{project.name}</h3>
                 <p className="project-desc">{project.description}</p>
@@ -440,6 +438,47 @@ export default function App() {
                     <li key={s}>{s}</li>
                   ))}
                 </ul>
+                <div className="project-actions">
+                  {project.liveLink ? (
+                    <a
+                      href={project.liveLink}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="project-btn project-btn-primary"
+                    >
+                      Live Demo <span aria-hidden="true">↗</span>
+                    </a>
+                  ) : null}
+                  {project.githubLink ? (
+                    <a
+                      href={project.githubLink}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="project-btn project-btn-ghost"
+                    >
+                      <svg
+                        className="gh-icon"
+                        viewBox="0 0 16 16"
+                        width="15"
+                        height="15"
+                        aria-hidden="true"
+                      >
+                        <path
+                          fill="currentColor"
+                          d="M8 0C3.58 0 0 3.58 0 8a8 8 0 0 0 5.47 7.59c.4.07.55-.17.55-.38
+                          0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13
+                          -.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66
+                          .07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15
+                          -.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82a7.6 7.6 0 0 1 4 0c1.53-1.04
+                          2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87
+                          3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38
+                          A8 8 0 0 0 16 8c0-4.42-3.58-8-8-8Z"
+                        />
+                      </svg>
+                      GitHub
+                    </a>
+                  ) : null}
+                </div>
               </Reveal>
             ))}
           </div>
